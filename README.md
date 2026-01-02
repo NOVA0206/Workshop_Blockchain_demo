@@ -152,4 +152,3 @@ Workshop Speaker & Facilitator
 <p align="center">
   ⚓ <b>Set Sail. Build Trust. Write Code.</b> ⚓
 </p>
-```
