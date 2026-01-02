@@ -143,8 +143,8 @@ Used as a **live demo** where students build:
 
 ## 👑 Captain of the Crew
 
-**Jeevan Jadhav**
-Workshop Speaker & Facilitator
+**Jeevan Jadhav**<br>
+Workshop Speaker & Facilitator<br>
 🧠 *Blockchain Fundamentals*
 
 ---
