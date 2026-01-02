@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Notes</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            min-height: 120px;
+            font-size: 1rem;
+        }
+
+        .button {
+            width: 100%;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .output-section {
+            margin-top: 2.5rem;
+            border-top: 2px solid #f3f4f6;
+            padding-top: 2rem;
+        }
+
+        .output-item {
+            background: #f0f0ff;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #9ca3af;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>✨ Anime Notes</h1>
+    <p class="subtitle">Save your favorite anime quotes, thoughts, and more!</p>
+
+    <label for="dataInput">Write your note:</label>
+    <textarea
+        id="dataInput"
+        placeholder="Enter your anime note here... 📝"
+    ></textarea>
+
+    <button class="button" onclick="saveToBlockchain()">Save Note 💫</button>
+
+    <div class="output-section">
+        <h2>📚 Saved Notes</h2>
+        <ul id="outputList">
+            <li class="empty-state">No notes yet. Start writing!</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    let notes = [];
+
+    window.addEventListener("DOMContentLoaded", () => {
+        const savedNotes = localStorage.getItem("animeNotes");
+        if (savedNotes) {
+            notes = JSON.parse(savedNotes);
+            renderNotes();
+        }
+    });
+
+    function saveToBlockchain() {
+        const input = document.getElementById("dataInput");
+
+        if (!input) {
+            alert("Textarea not found");
+            return;
+        }
+
+        const noteText = input.value.trim();
+        if (noteText === "") {
+            alert("Please enter a note 😊");
+            return;
+        }
+
+        // Save locally
+        const note = {
+            id: Date.now(),
+            text: noteText
+        };
+
+        notes.push(note);
+        localStorage.setItem("animeNotes", JSON.stringify(notes));
+        renderNotes();
+
+        // Save to blockchain
+        fetch("http://localhost:3000/save", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ content: noteText })
+        })
+        .then(res => res.json())
+        .then(block => {
+            console.log("Saved on blockchain:", block);
+        })
+        .catch(() => {
+            console.warn("Blockchain server not running");
+        });
+
+        input.value = "";
+    }
+
+    function deleteNote(id) {
+        notes = notes.filter(note => note.id !== id);
+        localStorage.setItem("animeNotes", JSON.stringify(notes));
+        renderNotes();
+    }
+
+    function renderNotes() {
+        const outputList = document.getElementById("outputList");
+
+        if (notes.length === 0) {
+            outputList.innerHTML =
+                '<li class="empty-state">No notes yet. Start writing!</li>';
+            return;
+        }
+
+        outputList.innerHTML = notes.map(note => `
+            <li class="output-item">
+                <span>${escapeHtml(note.text)}</span>
+                <button class="delete-btn" onclick="deleteNote(${note.id})">
+                    Delete
+                </button>
+            </li>
+        `).join("");
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+    }
+</script>
+
+</body>
+</html>
