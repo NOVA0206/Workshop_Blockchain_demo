@@ -1,15 +1,5 @@
-Perfect — below is a **FINAL, COPY-PASTE READY One Piece–themed README** with:
-
-✅ **Cover page image section**
-✅ **Opening theme song embedded with cover image**
-✅ **Cover song with its own cover image**
-✅ Still **faculty-safe & GitHub-clean**
-
-You can **directly replace your README.md** with this.
-
----
 <p align="center">
-  <img src="./Screenshot.png" alt="One Piece Blockchain Workshop Cover" width="85%">
+  <img src="https://i.pinimg.com/736x/ca/3d/d2/ca3dd24c5181b47371e587c9d68e3334.jpg" alt="One Piece Blockchain Workshop Cover" width="85%">
 </p>
 
 <h1 align="center">🏴‍☠️ Workshop_Blockchain_demo</h1>
@@ -28,26 +18,8 @@ You can **directly replace your README.md** with this.
 ## 🎶 Opening Theme – Set Sail 🏴‍☠️
 
 <p align="center">
-  <img src="https://i.ytimg.com/vi/8QHmMw0b6gA/maxresdefault.jpg" width="70%" alt="One Piece We Are Opening Cover">
+  <a href="https://youtu.be/YoeP9w5UIlg?si=mv8L7R8sdhLDlA7f"><img src="https://i.pinimg.com/736x/f1/b8/17/f1b817e831c6186cb93f29f56e8805a9.jpg" width="70%" alt="One Piece We Are Opening Cover"></a>
 </p>
-
-🎧 **One Piece Opening 1 – “We Are!”**  
-👉 https://www.youtube.com/watch?v=8QHmMw0b6gA  
-
-> 💡 *Play this while opening the workshop to instantly set the Grand Line vibe.*
-
----
-
-## 🎤 Cover Version – Modern Vibe ⚡
-
-<p align="center">
-  <img src="https://i.ytimg.com/vi/3cC8R9jKXzM/maxresdefault.jpg" width="70%" alt="We Are Cover Version">
-</p>
-
-🎶 **“We Are!” – Cover Version (Chill / Modern)**  
-👉 https://www.youtube.com/watch?v=3cC8R9jKXzM  
-
-> 🎧 *Perfect background music while students are coding.*
 
 ---
 
